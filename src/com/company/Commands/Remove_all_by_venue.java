@@ -1,8 +1,8 @@
 package com.company.Commands;
 
 import com.company.ClientOutput;
-import com.company.CommandExecuter;
 import com.company.Main;
+import com.company.Models.TicketManager;
 import com.company.Models.Venue;
 import com.company.Models.VenueType;
 
@@ -10,8 +10,8 @@ public class Remove_all_by_venue implements CommandExecuter {
     @Override
     public void Execute(String command) throws Exception {
         ClientOutput.print("Вводится Venue");
-        String name1 = Main.getString("name");
-        int capacity = Main.getInt("capacity");
+        String name1 = TicketManager.getString("name");
+        int capacity = TicketManager.getInt("capacity");
         VenueType type1 = null;
         while (true){
             try{
@@ -31,7 +31,7 @@ public class Remove_all_by_venue implements CommandExecuter {
             }
         }
         Venue v = new Venue(name1, capacity, type1);
-        if(Main.ticket.removeIf(u -> u.getVenue().equals(v))){
+        if(TicketManager.ticket.removeIf(u -> u.getVenue().equals(v))){
             ClientOutput.print("Успешно");
         }
         else{

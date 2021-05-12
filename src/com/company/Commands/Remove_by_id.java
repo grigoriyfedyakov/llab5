@@ -1,8 +1,8 @@
 package com.company.Commands;
 
 import com.company.ClientOutput;
-import com.company.CommandExecuter;
 import com.company.Main;
+import com.company.Models.TicketManager;
 
 
 public class Remove_by_id implements CommandExecuter {
@@ -10,7 +10,7 @@ public class Remove_by_id implements CommandExecuter {
     public void Execute(String command)  {
         if(command.split(" ",2).length == 2) {
             try {
-                if(Main.ticket.removeIf(u -> u.getId() == Long.parseLong(command.split(" ", 2)[1]))){
+                if(TicketManager.ticket.removeIf(u -> u.getId() == Long.parseLong(command.split(" ", 2)[1]))){
                     ClientOutput.print("Удаление успешно");
                 }
                 else{

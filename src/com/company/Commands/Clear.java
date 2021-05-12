@@ -1,13 +1,13 @@
 package com.company.Commands;
 
 import com.company.ClientOutput;
-import com.company.CommandExecuter;
-import com.company.Main;
+import com.company.Models.TicketManager;
+
 
 public class Clear implements CommandExecuter {
     @Override
     public void Execute(String command) throws Exception {
-        Main.ticket.clear();
+        TicketManager.ticket.clear();
         ClientOutput.print("Список очищен");
     }
 

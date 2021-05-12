@@ -24,8 +24,8 @@ public class Venue {
     }
 
     public Venue(String name, int capacity, VenueType type) {
-        id = Main.ids_Venue;
-        Main.ids_Venue++;
+        id = TicketManager.ids_Venue;
+        TicketManager.ids_Venue++;
         this.name = name;
         this.capacity = capacity;
         this.type = type;

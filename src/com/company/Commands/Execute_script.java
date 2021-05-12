@@ -1,7 +1,6 @@
 package com.company.Commands;
 
 import com.company.ClientOutput;
-import com.company.CommandExecuter;
 import com.company.Main;
 
 import java.io.File;
@@ -9,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.util.Locale;
 import java.util.Scanner;
 
-import static com.company.Main.commands;
 
 public class Execute_script implements CommandExecuter {
     @Override
@@ -19,9 +17,9 @@ public class Execute_script implements CommandExecuter {
 
             while (scanner.hasNext()){
                 String next = scanner.nextLine().trim();
-                for (CommandExecuter commands : commands) {
-                    if (next.startsWith(commands.getName()) || next.startsWith(commands.getName().toLowerCase(Locale.ROOT))) {
-                        commands.Execute(next);
+                for (CommandExecuter Commands : CommandManager.commands) {
+                    if (next.startsWith(Commands.getName()) || next.startsWith(Commands.getName().toLowerCase(Locale.ROOT))) {
+                        Commands.Execute(next);
                     }
                 }
             }
