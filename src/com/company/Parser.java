@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class Parser {//используется паттерн singleton, доступ через getInstance
+public class Parser {
     private static String path;
     private static Parser instance;
 
@@ -25,7 +25,7 @@ public class Parser {//используется паттерн singleton, дос
     public void SetObject(){
         try{
             FileOutputStream stream = new FileOutputStream(path);
-            for (Ticket ticket : Main.ticket) {
+            for (Ticket ticket : TicketManager.ticket) {
                 String str = ticket.getName() + "," + ticket.getDiscount() + "," + ticket.getCoordinates().getX() + "," + ticket.getCoordinates().getY() + "," +
                         ticket.getCreationDate().toString() + "," + ticket.getVenue().getName() + "," + ticket.getVenue().getCapacity() + "," +
                         ticket.getVenue().getType() + "," + ticket.getType() + "," + ticket.getPrice() + "\r\n";
@@ -37,7 +37,7 @@ public class Parser {//используется паттерн singleton, дос
         }
     }
 
-    public void getObject(){ // парсер
+    public Ticket getObject(){
         try {
             ClientOutput.print(path);
             Scanner scanner = new Scanner(new File(path));
@@ -59,10 +59,8 @@ public class Parser {//используется паттерн singleton, дос
                     type = TicketType.valueOf(strs[8]);
                 }
                 int price = Integer.parseInt(strs[9]);
-                Main.ticket.add(new Ticket(Main.ids_ticket ,name,new Coordinates(x,y),creationTime, price, discount,
-                                type,new Venue(Main.ids_Venue, name1, capacity, venueType)));
-                Main.ids_ticket++;
-                Main.ids_Venue++;
+                return new Ticket(TicketManager.ids_ticket ,name,new Coordinates(x,y),creationTime, price, discount,
+                        type,new Venue(TicketManager.ids_Venue, name1, capacity, venueType));
             }
         } catch (FileNotFoundException e) {
             ClientOutput.print("Файл не найден");
@@ -79,6 +77,6 @@ public class Parser {//используется паттерн singleton, дос
         catch (Exception e){
             ClientOutput.print(e.getMessage());
         }
-
+        return null;
     }
 }

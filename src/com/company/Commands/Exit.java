@@ -1,7 +1,6 @@
 package com.company.Commands;
 
 import com.company.ClientOutput;
-import com.company.CommandExecuter;
 
 public class Exit implements CommandExecuter {
     @Override

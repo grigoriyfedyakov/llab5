@@ -1,8 +1,8 @@
 package com.company.Commands;
 
 import com.company.ClientOutput;
-import com.company.CommandExecuter;
 import com.company.Main;
+import com.company.Models.TicketManager;
 import com.company.Models.Ticket;
 
 import java.util.Arrays;
@@ -13,21 +13,22 @@ public class Update_by_id implements CommandExecuter {
         try {
             if(command.split(",",2).length >= 2) {
                 Long id = Long.parseLong(command.split(",", 2)[1].trim());
-                Ticket[] tickets = new Ticket[Main.ticket.size()];
-                Main.ticket.toArray(tickets);
+                Ticket[] tickets = new Ticket[TicketManager.ticket.size()];
+                TicketManager.ticket.toArray(tickets);
                 boolean isb = false;
                 for (int i = 0; i < tickets.length; i++){
                     if(id.equals(tickets[i].getId())){
                         ClientOutput.print("Введите значение");
-                        tickets[i] = Main.get_ticket();
+                        TicketManager tm = new TicketManager();
+                        tickets[i] = tm.get_ticket();
                         tickets[i].setId(id);
                         isb = true;
                         break;
                     }
                 }
 
-                Main.ticket.clear();
-                Main.ticket.addAll(Arrays.asList(tickets));
+                TicketManager.ticket.clear();
+                TicketManager.ticket.addAll(Arrays.asList(tickets));
                 if(isb){
                     ClientOutput.print("Успешно");
                 }
